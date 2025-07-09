@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Strict Number Input</title>
+</head>
+<body>
+
+  <label for="customNumber">Enter a number:</label>
+  <input type="text" id="customNumber" placeholder="Only digits 0–9" />
+  <button id="clearBtn" type="button">Clear</button>
+
+  <script>
+    const input = document.getElementById("customNumber");
+    const clearBtn = document.getElementById("clearBtn");
+
+    input.addEventListener("keydown", function(event) {
+      const key = event.key;
+
+      const allowedControlKeys = [
+        "Backspace", "Delete", "ArrowLeft", "ArrowRight", "Tab"
+      ];
+
+      const isDigit = key >= '0' && key <= '9';
+      const isControl = allowedControlKeys.includes(key);
+
+      if (!isDigit && !isControl) {
+        event.preventDefault();
+      }
+    });
+
+    input.addEventListener("paste", function(event) {
+      const paste = (event.clipboardData || window.clipboardData).getData("text");
+      if (!/^\d+$/.test(paste)) {
+        event.preventDefault();
+      }
+    });
+
+    clearBtn.addEventListener("click", function() {
+      input.value = "";
+    });
+  </script>
+
+</body>
+</html>
