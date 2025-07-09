@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Press Detector</title>
+</head>
+<body>
+
+  <h1>Press any key on your keyboard</h1>
+
+  <script>
+    document.addEventListener("keydown", function(event) {
+      const asciiCode = event.keyCode || event.which;
+      const key = event.key;
+
+      let keys = [];
+
+      if (event.altKey)   keys.push("Alt is pressed");
+      if (event.ctrlKey)  keys.push("Ctrl is pressed");
+      if (event.shiftKey) keys.push("Shift is pressed");
+
+      let message = `Key pressed: ${key}\nASCII Code: ${asciiCode}`;
+
+      if (keys.length > 0) {
+        message += `\nSpecial key(s): ${keys.join(" + ")}`; 
+      } else {
+        message += `\nNo special keys pressed.`;
+      }
+
+      alert(message);
+    });
+  </script>
+
+</body>
+</html>
